@@ -18,8 +18,8 @@ class App extends Component {
 
   setValue(newValue) {
     this.setState({value: newValue});
-    // replace this w/ update() methpd
-    this.instance.scene.background.setRGB(newValue, newValue, newValue);
+    
+    this.instance.update(newValue);
     this.instance.render();
   }
 

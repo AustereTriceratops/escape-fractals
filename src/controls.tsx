@@ -22,7 +22,7 @@ class Controls extends Component {
             <input
                 step="0.01"
                 type="range"
-                min="0"
+                min="-1"
                 max="1"
                 value={this.props.value}
                 onChange={this.onChange}
