@@ -7,19 +7,22 @@ import './App.css';
 
 class App extends Component {
   state = {
-    value: 0.2
+    params: [0, 0, 0, 0],
   };
 
   instance: Main;
 
   componentDidMount() {
-    this.instance = new Main({value: this.state.value});
+    this.instance = new Main({params: this.state.params});
   }
 
-  setValue(newValue) {
-    this.setState({value: newValue});
-    
-    this.instance.update(newValue);
+  setParams(value, index) {
+    const newParams = [...this.state.params];
+    newParams[index] = value;
+
+    this.setState({params: newParams});
+
+    this.instance.update(newParams);
     this.instance.render();
   }
 
@@ -27,8 +30,8 @@ class App extends Component {
     return (
       <>
         <Controls
-          value={this.state.value}
-          setValue={this.setValue.bind(this)}
+          params={this.state.params}
+          setParams={this.setParams.bind(this)}
         />
         <div
           className="canvas-wrapper"

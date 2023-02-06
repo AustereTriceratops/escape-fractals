@@ -10,7 +10,6 @@ export default class Main {
     zoom = 4.0;
     offset = new THREE.Vector2(-2.0*this.aspect, -2.0);
 
-    
     scene: THREE.Scene;
     camera: THREE.OrthographicCamera;
     renderer: THREE.WebGLRenderer;
@@ -24,7 +23,10 @@ export default class Main {
             aspect: {type: 'float', value: this.aspect},
             zoom: {type:'float', value: this.zoom},
             offset: {type:'vec2', value: this.offset},
-            a: {type:'float', value: props.value},
+            a: {type:'float', value: props.a},
+            b: {type:'float', value: props.b},
+            c: {type:'float', value: props.c},
+            d: {type:'float', value: props.d},
         };
 
         this.setupScene();
@@ -71,8 +73,6 @@ export default class Main {
     /// ================ EVENTS ================
 
     scroll(event){
-        event.preventDefault();
-        
         const zoom_0 = this.zoom;
 
         // chrome vs. firefox
@@ -99,8 +99,11 @@ export default class Main {
 
     /// ======== UPDATING AND RENDERING ========
 
-    update(val) {
-        this.uniforms.a.value = val;
+    update(params) {
+        this.uniforms.a.value = params[0];
+        this.uniforms.b.value = params[1];
+        this.uniforms.c.value = params[2];
+        this.uniforms.d.value = params[3];
     }
 
     render() {

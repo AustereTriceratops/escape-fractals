@@ -16,6 +16,9 @@ uniform vec2 offset;
 // ======================
 
 uniform float a;
+uniform float b;
+uniform float c;
+uniform float d;
 
 // =================================
 // === COMPLEX NUMBER OPERATIONS ===
@@ -33,28 +36,30 @@ vec2 conj (vec2 a) {
 // === MAIN ===
 // ============
 
-float mandelbrot(vec2 c){
+float mandelbrot(vec2 point){
     float alpha = 1.0;
     vec2 z = vec2(0.0, 0.0);
     vec2 z_0;
     vec2 z_1;
-    vec2 z_2;
 
     // i < max iterations
-    for (int i=0; i < 200; i++){ 
-        z_2 = z_1;
+    for (int i=0; i < 200; i++){
         z_1 = z_0;
         z_0 = z;
 
         float x_0_sq = z_0.x*z_0.x;
         float y_0_sq = z_0.y*z_0.y;
         vec2 z_0_sq = vec2(x_0_sq - y_0_sq, 2.0*z_0.x*z_0.y);
+
         float x_1_sq = z_1.x*z_1.x;
         float y_1_sq = z_1.y*z_1.y;
         vec2 z_1_sq = vec2(x_1_sq - y_1_sq, 2.0*z_1.x*z_1.y);
 
-        // the recurrence equation
-        z = z_0_sq + c + a * conj(z_0);
+        // ===============================
+        // ===== RECURRENCE RELATION =====
+        // ===============================
+        z = z_0_sq + a * conj(z_0) + b * z_0 + c * conj(z_1) + d * z_1 * conj(z_0) + point;
+
         float z_0_mag = x_0_sq + y_0_sq;
         float z_1_mag = x_1_sq + y_1_sq;
 

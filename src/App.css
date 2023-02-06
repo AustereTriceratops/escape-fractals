@@ -2,8 +2,13 @@ body {
   overflow: hidden;
 }
 
-input {
+div.control_panel {
   position: absolute;
+  width: 20%;
+}
+
+input {
+  width: 100%;
 }
 
 canvas {
