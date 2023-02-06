@@ -27,6 +27,15 @@ export default class Main {
             a: {type:'float', value: props.value},
         };
 
+        this.setupScene();
+
+        this.scroll = this.scroll.bind(this);
+        this.subscribeEvents();
+        this.attachToDOM();
+        this.render();
+    }
+
+    setupScene() {
         this.scene = new THREE.Scene();
         this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
 
@@ -34,9 +43,6 @@ export default class Main {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
         this.createMesh();
-
-        this.attachToDOM();
-        this.render();
     }
 
     attachToDOM() {
@@ -60,6 +66,35 @@ export default class Main {
         const mesh = new THREE.Mesh(geometry, material);
         
         this.scene.add(mesh);
+    }
+
+    /// ================ EVENTS ================
+
+    scroll(event){
+        event.preventDefault();
+        
+        const zoom_0 = this.zoom;
+
+        // chrome vs. firefox
+        if ("wheelDeltaY" in event){  // chrome vs. firefox
+            this.zoom *= 1 - event.wheelDeltaY*0.0003;
+        } else{
+            this.zoom *= 1 + event.deltaY*0.01;
+        }
+        
+        const space = this.zoom - zoom_0;
+        const mouseX = event.clientX / window.innerWidth;
+        const mouseY = 1-event.clientY / window.innerHeight;
+        this.offset = this.offset.add(new THREE.Vector2(-mouseX * space * this.aspect, -mouseY * space));
+        
+        this.uniforms.zoom.value = this.zoom;
+        this.uniforms.offset.value = this.offset;
+
+        this.render();
+    }
+
+    subscribeEvents() {
+        document.addEventListener('wheel', this.scroll);
     }
 
     /// ======== UPDATING AND RENDERING ========
