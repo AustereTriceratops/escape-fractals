@@ -47,18 +47,25 @@ float mandelbrot(vec2 point){
         z_1 = z_0;
         z_0 = z;
 
+        // ===============================
+        // =========== CACHING ===========
+        // ===============================
         float x_0_sq = z_0.x*z_0.x;
         float y_0_sq = z_0.y*z_0.y;
         vec2 z_0_sq = vec2(x_0_sq - y_0_sq, 2.0*z_0.x*z_0.y);
-
+        vec2 z_0_conj = conj(z_0);
+        
         float x_1_sq = z_1.x*z_1.x;
         float y_1_sq = z_1.y*z_1.y;
         vec2 z_1_sq = vec2(x_1_sq - y_1_sq, 2.0*z_1.x*z_1.y);
-
+        vec2 z_1_conj = conj(z_1);
+        
         // ===============================
         // ===== RECURRENCE RELATION =====
         // ===============================
-        z = z_0_sq + a * conj(z_0) + b * z_0 + c * conj(z_1) + d * z_1 * conj(z_0) + point;
+        z = z_0_sq + point;
+        z = z + a * z_0_conj + b * z_1_conj + c * cm(z_1, z_0) + d * z_0_sq * z_1;
+        //z = z + a * z_0_conj + b * cm(z_0_sq, z_0_conj) + c * cm(z_0_conj, z_0_conj) + d * cm(z_0_sq, z_0);
 
         float z_0_mag = x_0_sq + y_0_sq;
         float z_1_mag = x_1_sq + y_1_sq;

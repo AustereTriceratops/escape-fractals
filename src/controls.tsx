@@ -2,7 +2,6 @@ import React from "react"
 import { Component } from "react"
 
 
-
 class Controls extends Component {
     props;
 
@@ -19,45 +18,37 @@ class Controls extends Component {
         }
     }
 
-    render() {
+    createInput(val, n: number) {
         return (
-            <div className="control_panel">
+            <div className="input_row">
                 <input
                     step="0.01"
                     type="range"
-                    min="-1"
-                    max="1"
-                    value={this.props.params[0]}
-                    onChange={this.onChange(0)}
+                    min="-2"
+                    max="2"
+                    value={val}
+                    onChange={this.onChange(n)}
                     id="slider_a"
                 />
                 <input
                     step="0.01"
-                    type="range"
-                    min="-1"
-                    max="1"
-                    value={this.props.params[1]}
-                    onChange={this.onChange(1)}
-                    id="slider_b"
+                    type="number"
+                    min="-2"
+                    max="2"
+                    value={val}
+                    onChange={this.onChange(n)}
                 />
-                <input
-                    step="0.01"
-                    type="range"
-                    min="-1"
-                    max="1"
-                    value={this.props.params[2]}
-                    onChange={this.onChange(2)}
-                    id="slider_c"
-                />
-                <input
-                    step="0.01"
-                    type="range"
-                    min="-1"
-                    max="1"
-                    value={this.props.params[3]}
-                    onChange={this.onChange(3)}
-                    id="slider_d"
-                />
+            </div>
+        )
+    }
+
+    render() {
+        return (
+            <div className="control_panel">
+                <div className="close"></div>
+                <div className="body">
+                    {this.props.params.map((val, index) => this.createInput(val, index))}
+                </div>
             </div>
         )
     };
