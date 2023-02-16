@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {throttle} from 'lodash';
 
 import { FRAGMENT_SHADER } from './shader'
 
@@ -29,6 +30,8 @@ export default class Main {
             c: {type:'float', value: props.c},
             d: {type:'float', value: props.d},
         };
+
+        this.render = throttle(this.render.bind(this), 30);
 
         this.setupScene();
 
