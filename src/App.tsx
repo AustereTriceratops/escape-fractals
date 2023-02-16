@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     params: [0, 0, 0, 0],
     color_scheme: 3,
+    controls_hidden: false,
   };
 
   instance: Main;
@@ -34,6 +35,11 @@ class App extends Component {
     this.instance.render();
   }
 
+  toggleControls() {
+    const val = ! this.state.controls_hidden;
+    this.setState({controls_hidden: val});
+  }
+
   render() {
     return (
       <>
@@ -41,6 +47,8 @@ class App extends Component {
           params={this.state.params}
           setParams={this.setParams.bind(this)}
           setColorScheme={this.setColorScheme.bind(this)}
+          controls_hidden={this.state.controls_hidden}
+          toggleControls={this.toggleControls.bind(this)}
         />
         <div
           className="canvas-wrapper"
