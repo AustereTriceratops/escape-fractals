@@ -89,12 +89,12 @@ vec4 custom_colormap_1(float s) {
 
 vec4 custom_colormap_2(float s) {
   vec3 color_1 = vec3(0.04, 0.12, 0.13);
-  vec3 color_2 = vec3(0.07, 0.27, 0.33);
-  vec3 color_3 = vec3(0.07, 0.37, 0.54);
-  vec3 color_4 = vec3(0.08, 0.38, 0.69);
-  vec3 color_5 = vec3(0.29, 0.32, 0.85);
-  vec3 color_6 = vec3(0.63, 0.42, 0.94);
-  vec3 color_7 = vec3(0.8, 0.53, 0.97);
+  vec3 color_2 = vec3(0.06, 0.26, 0.33);
+  vec3 color_3 = vec3(0.14, 0.35, 0.61);
+  vec3 color_4 = vec3(0.30, 0.37, 0.80);
+  vec3 color_5 = vec3(0.43, 0.40, 0.86);
+  vec3 color_6 = vec3(0.55, 0.44, 0.91);
+  vec3 color_7 = vec3(0.78, 0.56, 0.96);
   vec3 color_8 = vec3(0.97, 0.86, 0.98);
 
   vec3 color;
@@ -199,7 +199,7 @@ void main(){
       gl_FragColor = custom_colormap_1(pow(s, 6.0));
     }
     else {
-      gl_FragColor = custom_colormap_2(pow(s, 2.0));
+      gl_FragColor = custom_colormap_2(pow(s, 6.0));
     }
 }
 `
