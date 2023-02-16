@@ -20,7 +20,7 @@ class Controls extends Component {
 
     createInput(val, n: number) {
         return (
-            <div className="input_row">
+            <div className="input_row" key={`row_${n}`}>
                 <input
                     step="0.01"
                     type="range"
@@ -29,7 +29,7 @@ class Controls extends Component {
                     value={val}
                     onChange={this.onChange(n)}
                     id="slider_a"
-                />
+                    />
                 <input
                     step="0.01"
                     type="number"
@@ -45,10 +45,11 @@ class Controls extends Component {
     render() {
         return (
             <div className="control_panel">
-                <div className="close"></div>
                 <div className="body">
                     {this.props.params.map((val, index) => this.createInput(val, index))}
+                    <div className="input_row"></div>
                 </div>
+                <div className="close"></div>
             </div>
         )
     };

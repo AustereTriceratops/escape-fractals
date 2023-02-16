@@ -10,6 +10,7 @@ uniform vec2 res;
 uniform float aspect;
 uniform float zoom;
 uniform vec2 offset;
+uniform int color_scheme;
 
 // ======================
 // === GUI PARAMETERS ===
@@ -30,6 +31,16 @@ vec2 cm (vec2 a, vec2 b) {
 
 vec2 conj (vec2 a) {
   return vec2(a.x, -a.y);
+}
+
+// =====================
+// === COLOR SCHEMES ===
+// =====================
+
+vec4 basic_colormap(float s, vec3 shade) {
+  vec3 coord = vec3(s, s, s);
+
+  return vec4(pow(coord, shade), 1.0);
 }
 
 // ============
@@ -64,7 +75,9 @@ float mandelbrot(vec2 point){
         // ===== RECURRENCE RELATION =====
         // ===============================
         z = z_0_sq + point;
-        z = z + a * z_0_conj + b * z_1_conj + c * cm(z_1, z_0) + d * z_0_sq * z_1;
+        z = z + a * z_1 * x_0_sq + b * z_0 * x_1_sq + c * cm(z_0_sq, z_1) + d * cm(z_0, z_1_conj);
+        //z = z + a * z_1_conj + b * cm(z_1, z_0) + c * z_0_sq * z_1 + d * z_0 * z_1_conj;
+        //z = z + a * z_0_conj + b * z_1_conj + c * cm(z_1, z_0) + d * z_0_sq * z_1;
         //z = z + a * z_0_conj + b * cm(z_0_sq, z_0_conj) + c * cm(z_0_conj, z_0_conj) + d * cm(z_0_sq, z_0);
 
         float z_0_mag = x_0_sq + y_0_sq;
@@ -85,7 +98,13 @@ void main(){
     vec2 uv = zoom * vec2(aspect, 1.0) * gl_FragCoord.xy / res + offset;
     float s = 1.0 - mandelbrot(uv);
 
-    vec3 coord = vec3(s, s, s);
-    gl_FragColor = vec4(pow(coord, vec3(5.38, 6.15, 3.85)), 1.0);
+    if (color_scheme == 0) {
+      vec3 shade = vec3(5.38, 6.15, 3.85);
+      gl_FragColor = basic_colormap(s, shade);
+    }
+    else {
+      vec3 shade = vec3(7.0, 2.0, 1.0);
+      gl_FragColor = basic_colormap(s, shade);
+    }
 }
 `

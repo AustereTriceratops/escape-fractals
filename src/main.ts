@@ -23,6 +23,7 @@ export default class Main {
             aspect: {type: 'float', value: this.aspect},
             zoom: {type:'float', value: this.zoom},
             offset: {type:'vec2', value: this.offset},
+            color_scheme: {type: "int", value: props.color_scheme},
             a: {type:'float', value: props.a},
             b: {type:'float', value: props.b},
             c: {type:'float', value: props.c},
@@ -104,6 +105,10 @@ export default class Main {
         this.uniforms.b.value = params[1];
         this.uniforms.c.value = params[2];
         this.uniforms.d.value = params[3];
+    }
+
+    updateColors(color_scheme: number) {
+        this.uniforms.color_scheme.value = color_scheme;
     }
 
     render() {

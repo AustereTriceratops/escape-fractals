@@ -8,12 +8,13 @@ import './App.css';
 class App extends Component {
   state = {
     params: [0, 0, 0, 0],
+    color_scheme: 1,
   };
 
   instance: Main;
 
   componentDidMount() {
-    this.instance = new Main({params: this.state.params});
+    this.instance = new Main(this.state);
   }
 
   setParams(value, index) {
@@ -23,6 +24,13 @@ class App extends Component {
     this.setState({params: newParams});
 
     this.instance.update(newParams);
+    this.instance.render();
+  }
+
+  setColorScheme(value) {
+    this.setState({color_scheme: value})
+
+    this.instance.updateColors(value);
     this.instance.render();
   }
 

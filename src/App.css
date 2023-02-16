@@ -15,24 +15,24 @@ div.body {
 }
 
 div.close {
-  background: #333;
-  height: 99%;
+  background: #4e4e4ea3;
+  height: 100%;
   width: 2%;
 }
 
 div.input_row {
-  height: 23%;
-  background: #d9d9d9;
-  padding: 0.5%;
   display: flex;
+  height: 18%;
+  background: #d9d9d97e;
+  padding: 0.6%;
 }
 
 input[type=range]{
-  width: 80%;
+  width: 75%;
 }
 
 input[type=number]{
-  width: 12%;
+  width: 17%;
   margin-left: 2%;
   margin-right: 1%;
   margin-top: 2%;
