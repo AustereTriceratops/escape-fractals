@@ -43,6 +43,94 @@ vec4 basic_colormap(float s, vec3 shade) {
   return vec4(pow(coord, shade), 1.0);
 }
 
+vec4 custom_colormap_1(float s) {
+  vec3 color_1 = vec3(0.22, 0.07, 0.08);
+  vec3 color_2 = vec3(0.29, 0.08, 0.08);
+  vec3 color_3 = vec3(0.49, 0.11, 0.09);
+  vec3 color_4 = vec3(0.66, 0.26, 0.14);
+  vec3 color_5 = vec3(0.78, 0.47, 0.24);
+  vec3 color_6 = vec3(0.87, 0.72, 0.39);
+  vec3 color_7 = vec3(0.9, 0.87, 0.55);
+  vec3 color_8 = vec3(0.85, 0.96, 0.67);
+
+  vec3 color;
+
+  if (s < 0.143) {
+    float x = 7.0 * s;
+    color = (1.0 - x) * color_1 + x * color_2;
+  }
+  else if (s < 0.286) {
+    float x = 7.0 * (s - 0.143);
+    color = (1.0 - x) * color_2 + x * color_3;
+  }
+  else if (s < 0.423) {
+    float x = 7.0 * (s - 0.286);
+    color = (1.0 - x) * color_3 + x * color_4;
+  }
+  else if (s < 0.571) {
+    float x = 7.0 * (s - 0.423);
+    color = (1.0 - x) * color_4 + x * color_5;
+  }
+  else if (s < 0.714) {
+    float x = 7.0 * (s - 0.571);
+    color = (1.0 - x) * color_5 + x * color_6;
+  }
+  else if (s < 0.857) {
+    float x = 7.0 * (s - 0.714);
+    color = (1.0 - x) * color_6 + x * color_7;
+  }
+  else {
+    float x = 7.0 * (s - 0.857);
+    color = (1.0 - x) * color_7 + x * color_8;
+  }
+
+  return vec4(color, 1.0);
+}
+
+vec4 custom_colormap_2(float s) {
+  vec3 color_1 = vec3(0.04, 0.12, 0.13);
+  vec3 color_2 = vec3(0.07, 0.27, 0.33);
+  vec3 color_3 = vec3(0.07, 0.37, 0.54);
+  vec3 color_4 = vec3(0.08, 0.38, 0.69);
+  vec3 color_5 = vec3(0.29, 0.32, 0.85);
+  vec3 color_6 = vec3(0.63, 0.42, 0.94);
+  vec3 color_7 = vec3(0.8, 0.53, 0.97);
+  vec3 color_8 = vec3(0.97, 0.86, 0.98);
+
+  vec3 color;
+
+  if (s < 0.143) {
+    float x = 7.0 * s;
+    color = (1.0 - x) * color_1 + x * color_2;
+  }
+  else if (s < 0.286) {
+    float x = 7.0 * (s - 0.143);
+    color = (1.0 - x) * color_2 + x * color_3;
+  }
+  else if (s < 0.423) {
+    float x = 7.0 * (s - 0.286);
+    color = (1.0 - x) * color_3 + x * color_4;
+  }
+  else if (s < 0.571) {
+    float x = 7.0 * (s - 0.423);
+    color = (1.0 - x) * color_4 + x * color_5;
+  }
+  else if (s < 0.714) {
+    float x = 7.0 * (s - 0.571);
+    color = (1.0 - x) * color_5 + x * color_6;
+  }
+  else if (s < 0.857) {
+    float x = 7.0 * (s - 0.714);
+    color = (1.0 - x) * color_6 + x * color_7;
+  }
+  else {
+    float x = 7.0 * (s - 0.857);
+    color = (1.0 - x) * color_7 + x * color_8;
+  }
+
+  return vec4(color, 1.0);
+}
+
 // ============
 // === MAIN ===
 // ============
@@ -75,8 +163,8 @@ float mandelbrot(vec2 point){
         // ===== RECURRENCE RELATION =====
         // ===============================
         z = z_0_sq + point;
-        z = z + a * z_1 * x_0_sq + b * z_0 * x_1_sq + c * cm(z_0_sq, z_1) + d * cm(z_0, z_1_conj);
-        //z = z + a * z_1_conj + b * cm(z_1, z_0) + c * z_0_sq * z_1 + d * z_0 * z_1_conj;
+        //z = z + a * z_1 * x_0_sq + b * z_0 * x_1_sq + c * cm(z_0_sq, z_1) + d * cm(z_0, z_1_conj);
+        z = z + a * z_1_conj + b * cm(z_1, z_0) + c * z_0_sq * z_1 + d * z_0 * z_1_conj;
         //z = z + a * z_0_conj + b * z_1_conj + c * cm(z_1, z_0) + d * z_0_sq * z_1;
         //z = z + a * z_0_conj + b * cm(z_0_sq, z_0_conj) + c * cm(z_0_conj, z_0_conj) + d * cm(z_0_sq, z_0);
 
@@ -90,6 +178,7 @@ float mandelbrot(vec2 point){
         }
     }
 
+    // in interval [0, 1]
     return alpha;
 }
 
@@ -102,9 +191,15 @@ void main(){
       vec3 shade = vec3(5.38, 6.15, 3.85);
       gl_FragColor = basic_colormap(s, shade);
     }
-    else {
-      vec3 shade = vec3(7.0, 2.0, 1.0);
+    else if (color_scheme == 1) {
+      vec3 shade = vec3(7.0, 3.0, 2.0);
       gl_FragColor = basic_colormap(s, shade);
+    }
+    else if (color_scheme == 2) {
+      gl_FragColor = custom_colormap_1(pow(s, 6.0));
+    }
+    else {
+      gl_FragColor = custom_colormap_2(pow(s, 2.0));
     }
 }
 `

@@ -47,7 +47,12 @@ class Controls extends Component {
             <div className="control_panel">
                 <div className="body">
                     {this.props.params.map((val, index) => this.createInput(val, index))}
-                    <div className="input_row"></div>
+                    <div className="input_row">
+                        <button onClick={() => this.props.setColorScheme(0)}>1</button>
+                        <button onClick={() => this.props.setColorScheme(1)}>2</button>
+                        <button onClick={() => this.props.setColorScheme(2)}>3</button>
+                        <button onClick={() => this.props.setColorScheme(3)}>4</button>
+                    </div>
                 </div>
                 <div className="close"></div>
             </div>

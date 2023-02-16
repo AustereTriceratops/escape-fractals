@@ -8,7 +8,7 @@ import './App.css';
 class App extends Component {
   state = {
     params: [0, 0, 0, 0],
-    color_scheme: 1,
+    color_scheme: 3,
   };
 
   instance: Main;
@@ -40,6 +40,7 @@ class App extends Component {
         <Controls
           params={this.state.params}
           setParams={this.setParams.bind(this)}
+          setColorScheme={this.setColorScheme.bind(this)}
         />
         <div
           className="canvas-wrapper"
