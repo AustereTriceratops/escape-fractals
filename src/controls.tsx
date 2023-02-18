@@ -28,7 +28,6 @@ class Controls extends Component {
                     max="2"
                     value={val}
                     onChange={this.onChange(n)}
-                    id="slider_a"
                     />
                 <input
                     step="0.01"

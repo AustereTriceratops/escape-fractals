@@ -14,10 +14,14 @@ class App extends Component {
 
   instance: Main;
 
+  // ============ LIFECYCLE ============
+  
   componentDidMount() {
     this.instance = new Main(this.state);
   }
 
+  // ========== STATE CONTROL ==========
+  
   setParams(value, index) {
     const newParams = [...this.state.params];
     newParams[index] = value;

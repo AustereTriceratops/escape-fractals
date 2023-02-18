@@ -31,7 +31,7 @@ export default class Main {
             d: {type:'float', value: props.d},
         };
 
-        this.render = throttle(this.render.bind(this), 30);
+        this.render = throttle(this.render.bind(this), 20);
 
         this.setupScene();
 
