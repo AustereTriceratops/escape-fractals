@@ -7,7 +7,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    params: [0, 0, 0, 0],
+    params: [0, 0, 0, 0, 0, 0],
     color_scheme: 3,
     controls_hidden: false,
   };

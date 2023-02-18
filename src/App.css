@@ -6,25 +6,35 @@ div.control_panel {
   display: flex;
   position: absolute;
   width: 20%;
-  height: 20%;
+  height: 30%;
 }
 
 div.body {
   width: 98%;
   height: 100%;
+  opacity: 0.4;
+}
+
+div.body:hover {
+  opacity: 0.8;
 }
 
 div.close {
-  background: #4e4e4ea3;
+  background: #4e4e4e;
+  opacity: 0.75;
   height: 100%;
   width: 2%;
 }
 
+div.close:hover {
+  opacity: 0.9;
+}
+
 div.input_row {
   display: flex;
-  height: 18%;
-  background: #d9d9d97e;
-  padding: 0.6%;
+  height: 13%;
+  background: #d9d9d9;
+  padding: 0.7%;
 }
 
 input[type=range]{

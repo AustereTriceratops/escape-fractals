@@ -20,6 +20,8 @@ uniform float a;
 uniform float b;
 uniform float c;
 uniform float d;
+uniform float e;
+uniform float f;
 
 // =================================
 // === COMPLEX NUMBER OPERATIONS ===
@@ -163,15 +165,18 @@ float mandelbrot(vec2 point){
         // ===== RECURRENCE RELATION =====
         // ===============================
         z = z_0_sq + point;
+        z = z + a * z_0_conj + b * z_1_conj + c * z_0_sq * z_1;
+        z = z + d * cm(z_0_sq, z_0) + e * cm(z_0, z_1_conj) + f * cm(z_0_sq, z_1);
+
         //z = z + a * z_1 * x_0_sq + b * z_0 * x_1_sq + c * cm(z_0_sq, z_1) + d * cm(z_0, z_1_conj);
-        z = z + a * z_1_conj + b * cm(z_1, z_0) + c * z_0_sq * z_1 + d * z_0 * z_1_conj;
+        //z = z + a * z_1_conj + b * cm(z_1, z_0) + c * z_0_sq * z_1 + d * z_0 * z_1_conj;
         //z = z + a * z_0_conj + b * z_1_conj + c * cm(z_1, z_0) + d * z_0_sq * z_1;
         //z = z + a * z_0_conj + b * cm(z_0_sq, z_0_conj) + c * cm(z_0_conj, z_0_conj) + d * cm(z_0_sq, z_0);
 
         float z_0_mag = x_0_sq + y_0_sq;
         float z_1_mag = x_1_sq + y_1_sq;
 
-        if(z_0_mag > 12.0){
+        if(z_0_mag > 15.0){
             float frac = (12.0 - z_1_mag) / (z_0_mag - z_1_mag);
             alpha = (float(i) - 1.0 + frac)/200.0; // should be same as max iterations
             break;

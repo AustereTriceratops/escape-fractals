@@ -29,6 +29,8 @@ export default class Main {
             b: {type:'float', value: props.b},
             c: {type:'float', value: props.c},
             d: {type:'float', value: props.d},
+            e: {type:'float', value: props.e},
+            f: {type:'float', value: props.f},
         };
 
         this.render = throttle(this.render.bind(this), 20);
@@ -108,6 +110,8 @@ export default class Main {
         this.uniforms.b.value = params[1];
         this.uniforms.c.value = params[2];
         this.uniforms.d.value = params[3];
+        this.uniforms.e.value = params[4];
+        this.uniforms.f.value = params[5];
     }
 
     updateColors(color_scheme: number) {
