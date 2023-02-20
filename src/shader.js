@@ -90,7 +90,7 @@ vec4 custom_colormap_1(float s) {
 }
 
 vec4 custom_colormap_2(float s) {
-  vec3 color_1 = vec3(0.04, 0.12, 0.13);
+  vec3 color_1 = vec3(0.04, 0.08, 0.09);
   vec3 color_2 = vec3(0.06, 0.26, 0.33);
   vec3 color_3 = vec3(0.14, 0.35, 0.61);
   vec3 color_4 = vec3(0.30, 0.37, 0.80);

@@ -28,6 +28,7 @@ class Controls extends Component {
                     max="2"
                     value={val}
                     onChange={this.onChange(n)}
+                    onDoubleClick={() => this.props.setParams(0, n)}
                     />
                 <input
                     step="0.01"
@@ -36,6 +37,7 @@ class Controls extends Component {
                     max="2"
                     value={val}
                     onChange={this.onChange(n)}
+                    onDoubleClick={() => this.props.setParams(0, n)}
                 />
             </div>
         )
