@@ -54,6 +54,7 @@ class Controls extends Component {
                             <button onClick={() => this.props.setColorScheme(1)}>2</button>
                             <button onClick={() => this.props.setColorScheme(2)}>3</button>
                             <button onClick={() => this.props.setColorScheme(3)}>4</button>
+                            <button onClick={() => this.props.setColorScheme(4)}>5</button>
                         </div>
                     </div>
                 }

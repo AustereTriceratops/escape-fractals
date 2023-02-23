@@ -133,6 +133,50 @@ vec4 custom_colormap_2(float s) {
   return vec4(color, 1.0);
 }
 
+vec4 custom_colormap_3(float s) {
+  vec3 color_1 = vec3(0.27, 0.0, 0.19);
+  vec3 color_2 = vec3(0.43, 0.02, 0.45);
+  vec3 color_3 = vec3(0.55, 0.06, 0.7);
+  vec3 color_4 = vec3(0.65, 0.16, 0.93);
+  vec3 color_5 = vec3(0.68, 0.42, 0.98);
+  vec3 color_6 = vec3(0.73, 0.61, 0.99);
+  vec3 color_7 = vec3(0.77, 0.81, 0.96);
+  vec3 color_8 = vec3(0.92, 0.91, 1.0);
+
+  vec3 color;
+
+  if (s < 0.143) {
+    float x = 7.0 * s;
+    color = (1.0 - x) * color_1 + x * color_2;
+  }
+  else if (s < 0.286) {
+    float x = 7.0 * (s - 0.143);
+    color = (1.0 - x) * color_2 + x * color_3;
+  }
+  else if (s < 0.423) {
+    float x = 7.0 * (s - 0.286);
+    color = (1.0 - x) * color_3 + x * color_4;
+  }
+  else if (s < 0.571) {
+    float x = 7.0 * (s - 0.423);
+    color = (1.0 - x) * color_4 + x * color_5;
+  }
+  else if (s < 0.714) {
+    float x = 7.0 * (s - 0.571);
+    color = (1.0 - x) * color_5 + x * color_6;
+  }
+  else if (s < 0.857) {
+    float x = 7.0 * (s - 0.714);
+    color = (1.0 - x) * color_6 + x * color_7;
+  }
+  else {
+    float x = 7.0 * (s - 0.857);
+    color = (1.0 - x) * color_7 + x * color_8;
+  }
+
+  return vec4(color, 1.0);
+}
+
 // ============
 // === MAIN ===
 // ============
@@ -203,8 +247,11 @@ void main(){
     else if (color_scheme == 2) {
       gl_FragColor = custom_colormap_1(pow(s, 6.0));
     }
-    else {
+    else if (color_scheme == 3) {
       gl_FragColor = custom_colormap_2(pow(s, 6.0));
+    }
+    else {
+      gl_FragColor = custom_colormap_3(pow(s, 6.0));
     }
 }
 `
