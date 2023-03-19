@@ -5,7 +5,7 @@ import Main from "./main";
 import './App.css';
 
 
-class App extends Component {
+class EscapeFractal extends Component {
   state = {
     params: [0, 0, 0, 0, 0, 0],
     color_scheme: 3,
@@ -63,4 +63,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default EscapeFractal;
