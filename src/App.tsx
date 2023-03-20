@@ -22,7 +22,7 @@ class EscapeFractal extends Component {
 
   // ========== STATE CONTROL ==========
   
-  setParams(value, index) {
+  setParams(value: number, index: number) {
     const newParams = [...this.state.params];
     newParams[index] = value;
 
@@ -32,7 +32,7 @@ class EscapeFractal extends Component {
     this.instance.render();
   }
 
-  setColorScheme(value) {
+  setColorScheme(value: number) {
     this.setState({color_scheme: value})
 
     this.instance.updateColors(value);

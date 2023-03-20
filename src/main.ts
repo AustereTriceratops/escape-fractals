@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import {throttle} from 'lodash';
 
 import { FRAGMENT_SHADER } from './shader'
+import React from 'react';
+import { mainProps } from './types';
 
 export default class Main {
     props;
@@ -16,7 +18,7 @@ export default class Main {
     renderer: THREE.WebGLRenderer;
     gridHighlights: THREE.Group;
     
-    constructor(props) {
+    constructor(props: mainProps) {
         this.props = props;
 
         this.uniforms = {
@@ -25,12 +27,12 @@ export default class Main {
             zoom: {type:'float', value: this.zoom},
             offset: {type:'vec2', value: this.offset},
             color_scheme: {type: "int", value: props.color_scheme},
-            a: {type:'float', value: props.a},
-            b: {type:'float', value: props.b},
-            c: {type:'float', value: props.c},
-            d: {type:'float', value: props.d},
-            e: {type:'float', value: props.e},
-            f: {type:'float', value: props.f},
+            a: {type:'float', value: props.params[0]},
+            b: {type:'float', value: props.params[1]},
+            c: {type:'float', value: props.params[2]},
+            d: {type:'float', value: props.params[3]},
+            e: {type:'float', value: props.params[4]},
+            f: {type:'float', value: props.params[5]},
         };
 
         this.render = throttle(this.render.bind(this), 20);
@@ -78,14 +80,15 @@ export default class Main {
 
     /// ================ EVENTS ================
 
-    scroll(event){
+    scroll(event: WheelEvent){
         const zoom_0 = this.zoom;
 
-        // chrome vs. firefox
-        if ("wheelDeltaY" in event){  // chrome vs. firefox
-            this.zoom *= 1 - event.wheelDeltaY*0.0003;
-        } else{
-            this.zoom *= 1 + event.deltaY*0.01;
+        // accounting for the different in scrolling between Chrome and FireFox
+        if (navigator.userAgent.indexOf("Firefox") != -1) {
+            this.zoom *= 1 + event.deltaY*0.003;
+        }
+        else {
+            this.zoom *= 1 + event.deltaY*0.001;
         }
         
         const space = this.zoom - zoom_0;
@@ -105,7 +108,7 @@ export default class Main {
 
     /// ======== UPDATING AND RENDERING ========
 
-    update(params) {
+    update(params: number[]) {
         this.uniforms.a.value = params[0];
         this.uniforms.b.value = params[1];
         this.uniforms.c.value = params[2];
