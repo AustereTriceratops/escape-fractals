@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import {throttle} from 'lodash';
 
 import { FRAGMENT_SHADER } from './shader'
-import React from 'react';
 import { mainProps } from './types';
 
 export default class Main {
@@ -16,7 +15,6 @@ export default class Main {
     scene: THREE.Scene;
     camera: THREE.OrthographicCamera;
     renderer: THREE.WebGLRenderer;
-    gridHighlights: THREE.Group;
     
     constructor(props: mainProps) {
         this.props = props;
