@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/escapefractals/static/css/main.f7e1800c.css",
+    "main.js": "/escapefractals/static/js/main.0d3253aa.js",
+    "index.html": "/escapefractals/index.html",
+    "main.f7e1800c.css.map": "/escapefractals/static/css/main.f7e1800c.css.map",
+    "main.0d3253aa.js.map": "/escapefractals/static/js/main.0d3253aa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f7e1800c.css",
+    "static/js/main.0d3253aa.js"
+  ]
+}
