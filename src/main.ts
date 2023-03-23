@@ -5,7 +5,7 @@ import { FRAGMENT_SHADER } from './shader'
 import { mainProps } from './types';
 
 export default class Main {
-    props;
+    props: mainProps;
     uniforms;
 
     aspect = window.innerWidth / window.innerHeight;
