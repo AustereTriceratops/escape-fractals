@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/escape-fractals/static/css/main.f7e1800c.css",
+    "main.css": "/escape-fractals/static/css/main.03c714e2.css",
     "main.js": "/escape-fractals/static/js/main.0d3253aa.js",
     "index.html": "/escape-fractals/index.html",
-    "main.f7e1800c.css.map": "/escape-fractals/static/css/main.f7e1800c.css.map",
+    "main.03c714e2.css.map": "/escape-fractals/static/css/main.03c714e2.css.map",
     "main.0d3253aa.js.map": "/escape-fractals/static/js/main.0d3253aa.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7e1800c.css",
+    "static/css/main.03c714e2.css",
     "static/js/main.0d3253aa.js"
   ]
 }
