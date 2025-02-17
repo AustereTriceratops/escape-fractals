@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/escape-fractals/static/css/main.bbc8277d.css",
-    "main.js": "/escape-fractals/static/js/main.1b956ecd.js",
+    "main.css": "/escape-fractals/static/css/main.822eb7f0.css",
+    "main.js": "/escape-fractals/static/js/main.bd08b15e.js",
     "static/media/githubicon.svg": "/escape-fractals/static/media/githubicon.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "index.html": "/escape-fractals/index.html",
-    "main.bbc8277d.css.map": "/escape-fractals/static/css/main.bbc8277d.css.map",
-    "main.1b956ecd.js.map": "/escape-fractals/static/js/main.1b956ecd.js.map"
+    "main.822eb7f0.css.map": "/escape-fractals/static/css/main.822eb7f0.css.map",
+    "main.bd08b15e.js.map": "/escape-fractals/static/js/main.bd08b15e.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbc8277d.css",
-    "static/js/main.1b956ecd.js"
+    "static/css/main.822eb7f0.css",
+    "static/js/main.bd08b15e.js"
   ]
 }
