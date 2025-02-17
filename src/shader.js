@@ -40,10 +40,18 @@ vec2 conj (vec2 a) {
 // === COLOR SCHEMES ===
 // =====================
 
-vec4 basic_colormap(float s, vec3 shade) {
+/// s: always between 0.0 and 1.0
+/// inverted: either 0.0 or 1.0
+vec4 basic_colormap(float s, vec3 shade, float inverted) {
   vec3 coord = vec3(s, s, s);
 
-  return vec4(pow(coord, shade), 1.0);
+  // note: 'flat' logic, could maybe just do branching logic
+  // since it shouldn't be much of a performance hit
+  if (inverted > 0.0) {
+    return vec4(pow(vec3(1.0, 1.0, 1.0) - coord, 0.07*shade), 1.0);
+  } else {
+    return vec4(pow(coord, shade), 1.0);
+  }
 }
 
 vec4 custom_colormap_1(float s) {
@@ -221,9 +229,9 @@ float mandelbrot(vec2 point){
         float z_0_mag = x_0_sq + y_0_sq;
         float z_1_mag = x_1_sq + y_1_sq;
 
-        if(z_0_mag > 15.0){
-            float frac = (12.0 - z_1_mag) / (z_0_mag - z_1_mag);
-            alpha = (float(i) - 1.0 + frac)/200.0; // should be same as max iterations
+        if(z_0_mag > 15.0) {
+            float frac = (15.0 - z_1_mag) / (z_0_mag - z_1_mag);
+            alpha = (float(i) + frac)/200.0; // should be same as max iterations
             break;
         }
     }
@@ -237,13 +245,19 @@ void main(){
     vec2 uv = zoom * vec2(aspect, 1.0) * gl_FragCoord.xy / res + offset;
     float s = 1.0 - mandelbrot(uv);
 
+    /// note for anyone looking at this
+    /// inverted takes a value of either 0.0 or 1.0
+    /// inverted + (1 - 2*inverted) * X evaluates to = X when inverted = 0
+    /// and evaluates to = 1 - X when inverted = 1
+    /// it's basically a "boolean" but done with math instead
+
     if (color_scheme == 0) {
       vec3 shade = vec3(5.38, 6.15, 3.85);
-      gl_FragColor = basic_colormap(inverted + (1.0 - 2.0*inverted) * s, shade);
+      gl_FragColor = basic_colormap(s, shade, inverted);
     }
     else if (color_scheme == 1) {
       vec3 shade = vec3(7.0, 3.0, 2.0);
-      gl_FragColor = basic_colormap(inverted + (1.0 - 2.0*inverted) * s, shade);
+      gl_FragColor = basic_colormap(s, shade, inverted);
     }
     else if (color_scheme == 2) {
       gl_FragColor = custom_colormap_1(inverted + (1.0 - 2.0*inverted)*pow(s, 6.0));
