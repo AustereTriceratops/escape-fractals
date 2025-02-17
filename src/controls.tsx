@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Checkbox } from "@mui/material";
-import { ArrowLeft, ArrowRight } from '@mui/icons-material';
+import { ArrowLeft, ArrowRight, BorderStyle } from '@mui/icons-material';
 
 import { controlsProps, controlsState } from "./types";
 
@@ -68,12 +68,56 @@ class Controls extends Component<controlsProps, controlsState> {
                     opacity: mouseOver ? '0.8' : '0.3',
                 }}>
                     {this.props.params.map((val: number, index: number) => this.createInput(val, index))}
-                    <div className="input_row">
-                        <button onClick={() => this.props.setColorScheme(0)}>1</button>
-                        <button onClick={() => this.props.setColorScheme(1)}>2</button>
-                        <button onClick={() => this.props.setColorScheme(2)}>3</button>
-                        <button onClick={() => this.props.setColorScheme(3)}>4</button>
-                        <button onClick={() => this.props.setColorScheme(4)}>5</button>
+                    <div style={{
+                        display: 'flex',
+                        gap: '1rem',
+                        paddingLeft: '0.5rem'
+                    }}>
+                        <img 
+                            src={require('./assets/colormap_1.png')}
+                            width='30px'
+                            style={{
+                                cursor: 'pointer',
+                                border: '2px solid',
+                            }}
+                            onClick={() => this.props.setColorScheme(0)}
+                        />
+                        <img 
+                            src={require('./assets/colormap_2.png')}
+                            width='30px'
+                            style={{
+                                cursor: 'pointer',
+                                border: '2px solid',
+                            }}
+                            onClick={() => this.props.setColorScheme(1)}
+                        />
+                        <img 
+                            src={require('./assets/colormap_3.png')}
+                            width='30px'
+                            style={{
+                                cursor: 'pointer',
+                                border: '2px solid',
+                            }}
+                            onClick={() => this.props.setColorScheme(2)}
+                        />
+                        <img 
+                            src={require('./assets/colormap_4.png')}
+                            width='30px'
+                            style={{
+                                cursor: 'pointer',
+                                border: '2px solid',
+                            }}
+                            onClick={() => this.props.setColorScheme(3)}
+                        />
+                        <img 
+                            src={require('./assets/colormap_5.png')}
+                            width='30px'
+                            style={{
+                                cursor: 'pointer',
+                                border: '2px solid',
+                            }}
+                            onClick={() => this.props.setColorScheme(4)}
+                        />
                     </div>
                     <div
                         style={{

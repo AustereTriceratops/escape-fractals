@@ -6,11 +6,6 @@ div.close:hover {
   opacity: 0.9;
 }
 
-div.input_row {
-  display: flex;
-  flex-grow: 1;
-}
-
 input[type=range]{
   width: 75%;
 }

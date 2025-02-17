@@ -65,7 +65,7 @@ class EscapeFractal extends Component {
             onMouseOver={() => this.setState({githubIconHighlight: true})}
             onMouseLeave={() => this.setState({githubIconHighlight: false})}
           >
-            <img src={require('./githubicon.svg').default} width={32} height={32}/>
+            <img src={require('./assets/githubicon.svg').default} width={32} height={32}/>
           </div>
         </a>
         <Controls
