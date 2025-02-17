@@ -31,6 +31,7 @@ export default class Main {
             d: {type:'float', value: props.params[3]},
             e: {type:'float', value: props.params[4]},
             f: {type:'float', value: props.params[5]},
+            inverted: {type: 'float', value: props.colors_inverted}
         };
 
         this.render = throttle(this.render.bind(this), 20);
@@ -117,6 +118,10 @@ export default class Main {
 
     updateColors(color_scheme: number) {
         this.uniforms.color_scheme.value = color_scheme;
+    }
+    
+    updateColorsInverted(colors_inverted: number) {
+        this.uniforms.inverted.value = colors_inverted;
     }
 
     render() {

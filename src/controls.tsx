@@ -1,15 +1,16 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
+import { Checkbox } from "@mui/material";
 
-import { controlsProps } from "./types";
+import { controlsProps, controlsState } from "./types";
 
 
-class Controls extends Component {
+class Controls extends Component<controlsProps, controlsState> {
     props;
 
     constructor(props: controlsProps) {
         super(props);
         this.props = props;
+        this.state = {mouseOver: false}
 
         this.onChange = this.onChange.bind(this);
     }
@@ -48,7 +49,19 @@ class Controls extends Component {
 
     render() {
         return (
-            <div className="control_panel">
+            <div 
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    position: 'absolute',
+                    width: '20%',
+                    height: '30%',
+                    background: '#d9d9d9',
+                    opacity: this.state.mouseOver ? '0.8' : '0.3',
+                }}
+                onMouseOver={() => this.setState({mouseOver: true})}
+                onMouseLeave={() => this.setState({mouseOver: false})}
+            >
                 { this.props.controls_hidden? null : 
                     <div className="body">
                         {this.props.params.map((val: number, index: number) => this.createInput(val, index))}
@@ -58,6 +71,20 @@ class Controls extends Component {
                             <button onClick={() => this.props.setColorScheme(2)}>3</button>
                             <button onClick={() => this.props.setColorScheme(3)}>4</button>
                             <button onClick={() => this.props.setColorScheme(4)}>5</button>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: '20px',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <Checkbox
+                                checked={(this.props.colors_inverted > 0.0)}
+                                onChange={() => this.props.toggleColorsInverted()}
+                            />
+                            <div>Invert Colors</div>
                         </div>
                     </div>
                 }

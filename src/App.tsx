@@ -11,6 +11,7 @@ class EscapeFractal extends Component {
     color_scheme: 3,
     controls_hidden: false,
     githubIconHighlight: false,
+    colors_inverted: 0.0, //boolean which maps false/true to 0.0/1.0
   };
 
   instance: Main;
@@ -38,6 +39,13 @@ class EscapeFractal extends Component {
 
     this.instance.updateColors(value);
     this.instance.render();
+  }
+
+  setColorsInverted(value: number) {
+    this.setState({colors_inverted: value})
+
+    this.instance.updateColorsInverted(value);
+    this.instance.render()
   }
 
   toggleControls() {
@@ -72,6 +80,10 @@ class EscapeFractal extends Component {
           setColorScheme={this.setColorScheme.bind(this)}
           controls_hidden={this.state.controls_hidden}
           toggleControls={this.toggleControls.bind(this)}
+          colors_inverted={this.state.colors_inverted}
+          toggleColorsInverted={
+            () => this.setColorsInverted(1.0 - this.state.colors_inverted)
+          }
         />
         <div
           className="canvas-wrapper"

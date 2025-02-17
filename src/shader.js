@@ -11,6 +11,7 @@ uniform float aspect;
 uniform float zoom;
 uniform vec2 offset;
 uniform int color_scheme;
+uniform float inverted; // either 0.0 or 1.0
 
 // ======================
 // === GUI PARAMETERS ===
@@ -238,20 +239,20 @@ void main(){
 
     if (color_scheme == 0) {
       vec3 shade = vec3(5.38, 6.15, 3.85);
-      gl_FragColor = basic_colormap(s, shade);
+      gl_FragColor = basic_colormap(inverted + (1.0 - 2.0*inverted) * s, shade);
     }
     else if (color_scheme == 1) {
       vec3 shade = vec3(7.0, 3.0, 2.0);
-      gl_FragColor = basic_colormap(s, shade);
+      gl_FragColor = basic_colormap(inverted + (1.0 - 2.0*inverted) * s, shade);
     }
     else if (color_scheme == 2) {
-      gl_FragColor = custom_colormap_1(pow(s, 6.0));
+      gl_FragColor = custom_colormap_1(inverted + (1.0 - 2.0*inverted)*pow(s, 6.0));
     }
     else if (color_scheme == 3) {
-      gl_FragColor = custom_colormap_2(pow(s, 6.0));
+      gl_FragColor = custom_colormap_2(inverted + (1.0 - 2.0*inverted)*pow(s, 6.0));
     }
     else {
-      gl_FragColor = custom_colormap_3(pow(s, 6.0));
+      gl_FragColor = custom_colormap_3(inverted + (1.0 - 2.0*inverted)*pow(s, 6.0));
     }
 }
 `
