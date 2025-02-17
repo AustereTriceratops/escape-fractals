@@ -2,20 +2,6 @@ body {
   overflow: hidden;
 }
 
-div.body {
-  display: flex;
-  flex-direction: column;
-  width: 98%;
-  height: 100%;
-}
-
-
-div.close {
-  background: #4e4e4e;
-  opacity: 0.7;
-  width: 2%;
-}
-
 div.close:hover {
   opacity: 0.9;
 }

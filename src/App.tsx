@@ -9,7 +9,6 @@ class EscapeFractal extends Component {
   state = {
     params: [0, 0, 0, 0, 0, 0],
     color_scheme: 3,
-    controls_hidden: false,
     githubIconHighlight: false,
     colors_inverted: 0.0, //boolean which maps false/true to 0.0/1.0
   };
@@ -48,11 +47,6 @@ class EscapeFractal extends Component {
     this.instance.render()
   }
 
-  toggleControls() {
-    const val = ! this.state.controls_hidden;
-    this.setState({controls_hidden: val});
-  }
-
   render() {
     return (
       <>
@@ -78,8 +72,6 @@ class EscapeFractal extends Component {
           params={this.state.params}
           setParams={this.setParams.bind(this)}
           setColorScheme={this.setColorScheme.bind(this)}
-          controls_hidden={this.state.controls_hidden}
-          toggleControls={this.toggleControls.bind(this)}
           colors_inverted={this.state.colors_inverted}
           toggleColorsInverted={
             () => this.setColorsInverted(1.0 - this.state.colors_inverted)

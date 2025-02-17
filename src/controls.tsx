@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Checkbox } from "@mui/material";
+import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 
 import { controlsProps, controlsState } from "./types";
 
@@ -10,7 +11,7 @@ class Controls extends Component<controlsProps, controlsState> {
     constructor(props: controlsProps) {
         super(props);
         this.props = props;
-        this.state = {mouseOver: false}
+        this.state = {mouseOver: false, collapsed: false}
 
         this.onChange = this.onChange.bind(this);
     }
@@ -48,47 +49,60 @@ class Controls extends Component<controlsProps, controlsState> {
     }
 
     render() {
+        const {mouseOver, collapsed} = this.state;
+
         return (
             <div 
                 style={{
+                    position: 'absolute',
                     display: 'flex',
                     flexDirection: 'row',
-                    position: 'absolute',
-                    width: '20%',
-                    height: '30%',
-                    background: '#d9d9d9',
-                    opacity: this.state.mouseOver ? '0.8' : '0.3',
                 }}
                 onMouseOver={() => this.setState({mouseOver: true})}
                 onMouseLeave={() => this.setState({mouseOver: false})}
             >
-                { this.props.controls_hidden? null : 
-                    <div className="body">
-                        {this.props.params.map((val: number, index: number) => this.createInput(val, index))}
-                        <div className="input_row">
-                            <button onClick={() => this.props.setColorScheme(0)}>1</button>
-                            <button onClick={() => this.props.setColorScheme(1)}>2</button>
-                            <button onClick={() => this.props.setColorScheme(2)}>3</button>
-                            <button onClick={() => this.props.setColorScheme(3)}>4</button>
-                            <button onClick={() => this.props.setColorScheme(4)}>5</button>
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                gap: '20px',
-                                alignItems: 'center'
-                            }}
-                        >
-                            <Checkbox
-                                checked={(this.props.colors_inverted > 0.0)}
-                                onChange={() => this.props.toggleColorsInverted()}
-                            />
-                            <div>Invert Colors</div>
-                        </div>
+                <div style={{
+                    display: collapsed ? 'none' : 'flex',
+                    flexDirection: 'column',
+                    background: '#d9d9d9',
+                    opacity: mouseOver ? '0.8' : '0.3',
+                }}>
+                    {this.props.params.map((val: number, index: number) => this.createInput(val, index))}
+                    <div className="input_row">
+                        <button onClick={() => this.props.setColorScheme(0)}>1</button>
+                        <button onClick={() => this.props.setColorScheme(1)}>2</button>
+                        <button onClick={() => this.props.setColorScheme(2)}>3</button>
+                        <button onClick={() => this.props.setColorScheme(3)}>4</button>
+                        <button onClick={() => this.props.setColorScheme(4)}>5</button>
                     </div>
-                }
-                <div className="close" onClick={this.props.toggleControls}></div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: '20px',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Checkbox
+                            checked={(this.props.colors_inverted > 0.0)}
+                            onChange={() => this.props.toggleColorsInverted()}
+                        />
+                        <div>Invert Colors</div>
+                    </div>
+                </div>
+                <div 
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        background: '#555',
+                        color: 'white',
+                        opacity: '70%',
+                        cursor: 'pointer',
+                      }}
+                    onClick={() => this.setState({collapsed: !collapsed})}
+                >
+                    {collapsed? <ArrowRight/> : <ArrowLeft/>}
+                </div>
             </div>
         )
     };
