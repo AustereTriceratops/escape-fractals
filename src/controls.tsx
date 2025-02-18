@@ -18,34 +18,9 @@ class Controls extends Component<controlsProps, controlsState> {
 
     onChange(index: number) {
         return (event: React.ChangeEvent<HTMLInputElement>) => {
-            const val = parseFloat( event.currentTarget.value )
+            const val = parseFloat( event.currentTarget.value );
             this.props.setParams(val, index);
         }
-    }
-
-    createInput(val: number, n: number) {
-        return (
-            <div className="input_row" key={`row_${n}`}>
-                <input
-                    step="0.01"
-                    type="range"
-                    min="-2"
-                    max="2"
-                    value={val}
-                    onChange={this.onChange(n)}
-                    onDoubleClick={() => this.props.setParams(0, n)}
-                    />
-                <input
-                    step="0.01"
-                    type="number"
-                    min="-2"
-                    max="2"
-                    value={val}
-                    onChange={this.onChange(n)}
-                    onDoubleClick={() => this.props.setParams(0, n)}
-                />
-            </div>
-        )
     }
 
     render() {
@@ -64,14 +39,36 @@ class Controls extends Component<controlsProps, controlsState> {
                 <div style={{
                     display: collapsed ? 'none' : 'flex',
                     flexDirection: 'column',
+                    gap: '0.2rem',
+                    padding: '0.4rem',
                     background: '#d9d9d9',
                     opacity: mouseOver ? '0.8' : '0.3',
+                    userSelect: 'none'
                 }}>
-                    {this.props.params.map((val: number, index: number) => this.createInput(val, index))}
+                    {this.props.params.map((val: number, index: number) => (
+                        <div
+                            key={`row_${index}`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.4rem'
+                            }}
+                        >
+                            <input
+                                step="0.01"
+                                type="range"
+                                min="-2"
+                                max="2"
+                                value={val}
+                                onChange={this.onChange(index)}
+                                onDoubleClick={() => this.props.setParams(0, index)}
+                            />
+                            {val}
+                        </div>
+                    ))}
                     <div style={{
                         display: 'flex',
                         gap: '1rem',
-                        paddingLeft: '0.5rem'
                     }}>
                         <img 
                             src={require('./assets/colormap_1.png')}
